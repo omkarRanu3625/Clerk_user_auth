@@ -1,0 +1,22 @@
+{
+  "name": "clerk_auth",
+  "version": "1.0.0",
+  "description": "Clerh Athentication and User Management",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omkarRanu3625/clerk_user_auth.git"
+  },
+  "keywords": [
+    "Clerk"
+  ],
+  "author": "Omkar Prajapati",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/omkarRanu3625/clerk_user_auth/issues"
+  },
+  "homepage": "https://github.com/omkarRanu3625/clerk_user_auth#readme"
+}
