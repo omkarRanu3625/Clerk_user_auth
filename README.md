@@ -64,8 +64,9 @@ Example .env file:
 
 PORT=5003
 MONGO_URI=<your-mongodb-connection-string>
-CLERK_WEBHOOK_SECRET=<your-clerk-webhook-secret>
-CLERK_API_KEY=<your-clerk-api-key>
+CLERK_PUBLISHABLE_KEY= your_publishable_key
+CLERK_SECRET_KEY= your_api_key
+CLERK_WEBHOOK_SECRET= your_webhook_singing_key
 
 ```
 
@@ -109,9 +110,9 @@ The server will be running at http://localhost:5003.
 
 ### User Management
 
-`POST /api/auth/signup:` Create a new user
-`POST /api/auth/update:` Update an existing user
-`DELETE /api/auth/delete:` Delete a user
+- `POST /api/auth/signup:` Create a new user
+- `POST /api/auth/update:` Update an existing user
+- `DELETE /api/auth/delete:` Delete a user
 
 ---
 
@@ -159,17 +160,10 @@ npm install @clerk/express svix
 ```
 #### Package
 
-**1. @clerk/clerk-sdk-node** – Clerk SDK to interact with the Clerk API.
-**2. svix** – Used for **webhook** signature verification.
+- **1. @clerk/clerk-sdk-node** – Clerk SDK to interact with the Clerk API.
+- **2. svix** – Used for 
+- **webhook** signature verification.
 
-#### Add **.env file**
-
-```
-CLERK_PUBLISHABLE_KEY= your_publishable_key
-CLERK_SECRET_KEY= your_api_key
-CLERK_WEBHOOK_SECRET= your_webhook_singing_key
-
-```
 
 ---
 
