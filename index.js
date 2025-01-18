@@ -1,45 +1,24 @@
-const path = require('path')
-const express = require('express')
-const cors = require('cors')
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit')
+const express = require('express');
+const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const  apiRoutes = require('./routes/auth');
+const { connectDB } = require('./config/configDB');
+const { webhookHandler } = require('./middleware/webhook');
 
-const { connectDB } = require('./config/configDB')
-const apiRoutes = require('./routes/api')
 
-const app = express()
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  limit: 350, // Limit each IP to 350 requests
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
-  message: { message: "Too Many Requests, Try Again in 10 minutes" }
-})
+dotenv.config();
+connectDB();
+const app = express();
 
-// Security Middlwares
-app.use(helmet())
-app.use(cors())
-app.use(limiter)
+// Middleware
+app.use(bodyParser.json());
+// Routes
+app.use(apiRoutes);
+app.use(webhookHandler);
 
-// Request Body Middleware
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
 
-// Logging Middleware
-// app.use(logger); // Logging Requests To Access Log
-
-// Images Middleware
-app.use(express.static(path.resolve('./public')));
-
-const PORT = process.env.PORT || 5001
-
-connectDB()
-
-//All API Routes
-app.use(apiRoutes)
-app.all('*', (req, res) => {
-  res.status(404).json({ message: `${req.originalUrl} is not found on this server` })
-})
-
-app.listen(PORT, () => {
-  console.log(`Server running on port http://localhost:${PORT}`)
-})
+// Start server
+const port = process.env.PORT || 5003;
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
